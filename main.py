@@ -22,36 +22,37 @@ def print_board(first, second, third):
 
 def win_check(row1,row2,row3):
     #first for loop is checking does each row
-    stop = False
+    win = False
     message = ""
     for row in (row1,row2,row3):
         if row[0]==row[1]==row[2]:
             if row[0]=="X":
-                stop = True
+                win = True
                 message = "Player 1 wins!"
             elif row[0]=="O":   #I can't use else because all three can have empty value
-                stop = True
+                win = True
                 message = "Player 2 wins!"
 
     if (row1[0]=="X" and row2[0]=="X" and row3[0]=="X") or (row1[1]=="X" and row2[1]=="X" and row3[1]=="X") or (row1[2]=="X" and row2[2]=="X" and row3[2]=="X"):
-        stop = True
+        win = True
         message = "Player 1 wins!"
     elif (row1[0]=="O" and row2[0]=="O" and row3[0]=="O") or (row1[1]=="O" and row2[1]=="O" and row3[1]=="O") or (row1[2]=="O" and row2[2]=="O" and row3[2]=="O"):
-        stop = True
+        win = True
         message = "Player 2 wins!"
     elif (row1[0]=="X" and row2[1]=="X" and row3[2]=="X") or (row1[2]=="X" and row2[1]=="X" and row3[0]=="X"):
-        stop = True
+        win = True
         message = "Player 1 wins!"
     elif (row1[0]=="O" and row2[1]=="O" and row3[2]=="O") or (row1[2]=="O" and row2[1]=="O" and row3[0]=="O"):
-        stop = True
+        win = True
         message = "Player 2 wins!"
-    return stop, message
+    return win, message
 
-start=False
+
+stop=False
 print("Here is a grid example for entering X or O")
 print_board(show_1,show_2,show_3)
 var_2 = 0
-while start==False:
+while stop==False:
     if var_2 % 2==0:
         var_3="X"
     else:
@@ -79,10 +80,10 @@ while start==False:
 
     print_board(line_1, line_2, line_3)
 
-    stop, message= win_check(line_1, line_2, line_3)
+    win, message= win_check(line_1, line_2, line_3)
 
     if message!="":
         print(f"Game Over! {message}")
-    start = stop
+    stop = win
 
     var_2+=1
